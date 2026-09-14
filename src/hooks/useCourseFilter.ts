@@ -14,7 +14,7 @@ export function useCourseFilter(courses: Course[]) {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return courses.filter((course) => {
+    const next = courses.filter((course) => {
       const matchesCategory = category === "All" || course.category === category;
       if (!matchesCategory) return false;
       if (!q) return true;
@@ -27,6 +27,8 @@ export function useCourseFilter(courses: Course[]) {
         .toLowerCase();
       return haystack.includes(q);
     });
+
+    return [...next].sort((a, b) => a.code.localeCompare(b.code) || a.title.localeCompare(b.title));
   }, [courses, query, category]);
 
   return { query, setQuery, category, setCategory, categories, filtered };

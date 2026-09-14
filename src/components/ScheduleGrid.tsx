@@ -13,8 +13,8 @@ interface GridBlock {
   key: string;
   courseId: string;
   day: string;
-  rowStart: number;
-  rowSpan: number;
+  startMinutes: number;
+  endMinutes: number;
   label: string;
   sub: string;
   color: string;
@@ -29,14 +29,12 @@ export function ScheduleGrid() {
       for (const meeting of entry.section.schedule) {
         const start = toMinutes(meeting.startTime);
         const end = toMinutes(meeting.endTime);
-        const rowStart = Math.round((start - GRID_START_MINUTES) / SLOT_MINUTES) + 1;
-        const rowSpan = Math.max(1, Math.round((end - start) / SLOT_MINUTES));
         out.push({
           key: `${entry.section.id}-${meeting.day}`,
           courseId: entry.courseId,
           day: meeting.day,
-          rowStart,
-          rowSpan,
+          startMinutes: start,
+          endMinutes: end,
           label: entry.courseCode,
           sub: `${formatTime(meeting.startTime)}–${formatTime(meeting.endTime)} · ${entry.section.room}`,
           color: entry.color,
@@ -95,7 +93,7 @@ export function ScheduleGrid() {
           {DAYS.map((day) => (
             <div
               key={day}
-              className="relative grid border-l border-line"
+              className="relative border-l border-line"
               style={{ gridTemplateRows: `repeat(${ROW_COUNT}, 28px)` }}
             >
               {Array.from({ length: ROW_COUNT }).map((_, i) => (
@@ -103,24 +101,33 @@ export function ScheduleGrid() {
               ))}
               {blocks
                 .filter((b) => b.day === day)
-                .map((b) => (
-                  <button
-                    key={b.key}
-                    type="button"
-                    onClick={() => removeCourse(b.courseId)}
-                    title={`${b.label} — click to remove from schedule`}
-                    style={{
-                      gridRow: `${b.rowStart} / span ${b.rowSpan}`,
-                      backgroundColor: `${b.color}1A`,
-                      borderColor: b.color,
-                      color: b.color,
-                    }}
-                    className="absolute inset-x-0.5 z-10 flex flex-col overflow-hidden rounded-md border-l-[3px] px-1.5 py-1 text-left transition-opacity hover:opacity-80"
-                  >
-                    <span className="truncate text-[11px] font-semibold">{b.label}</span>
-                    <span className="truncate text-[10px] opacity-80">{b.sub}</span>
-                  </button>
-                ))}
+                .map((b) => {
+                  const top = ((b.startMinutes - GRID_START_MINUTES) / (GRID_END_MINUTES - GRID_START_MINUTES)) * 100;
+                  const height = ((b.endMinutes - b.startMinutes) / (GRID_END_MINUTES - GRID_START_MINUTES)) * 100;
+
+                  return (
+                    <button
+                      key={b.key}
+                      type="button"
+                      onClick={() => removeCourse(b.courseId)}
+                      title={`${b.label} — click to remove from schedule`}
+                      style={{
+                        position: "absolute",
+                        left: "4px",
+                        right: "4px",
+                        top: `${top}%`,
+                        height: `${Math.max(height, 5)}%`,
+                        backgroundColor: `${b.color}1A`,
+                        borderColor: b.color,
+                        color: b.color,
+                      }}
+                      className="z-10 flex flex-col justify-center overflow-hidden rounded-md border-l-[3px] px-1.5 py-1 text-left shadow-sm transition-opacity hover:opacity-80"
+                    >
+                      <span className="truncate text-[11px] font-semibold">{b.label}</span>
+                      <span className="truncate text-[10px] opacity-80">{b.sub}</span>
+                    </button>
+                  );
+                })}
             </div>
           ))}
         </div>

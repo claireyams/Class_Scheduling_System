@@ -11,9 +11,101 @@
   scrollbar-color: #C7CBC1 transparent;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.theme-light {
+  --bg: #fafaf7;
+  --bg-strong: #f3f5ef;
+  --panel: #ffffff;
+  --panel-soft: #f7f8f5;
+  --panel-alt: #eef4f0;
+  --text: #1a1f1c;
+  --muted: #5d675f;
+  --line: #e6e3dc;
+  --forest: #245530;
+  --forest-strong: #1d4528;
+  --shadow: rgba(15, 38, 21, 0.08);
+  color-scheme: light;
+}
+
+.theme-dark {
+  --bg: #0f1714;
+  --bg-strong: #17211d;
+  --panel: #16241f;
+  --panel-soft: #1d2d29;
+  --panel-alt: #233630;
+  --text: #edf3ee;
+  --muted: #b2bdb4;
+  --line: rgba(255, 255, 255, 0.08);
+  --forest: #9ad1a5;
+  --forest-strong: #c8ebca;
+  --shadow: rgba(0, 0, 0, 0.35);
+  color-scheme: dark;
+}
+
 body {
-  background-color: #FAFAF7;
-  color: #1A1F1C;
+  background:
+    radial-gradient(circle at top left, rgba(191, 212, 184, 0.35), transparent 24%),
+    radial-gradient(circle at top right, rgba(240, 206, 103, 0.22), transparent 20%),
+    var(--bg);
+  color: var(--text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+body, input, select, button {
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+.theme-dark .bg-white,
+.theme-dark .bg-paper,
+.theme-dark .bg-white\/80,
+.theme-dark .bg-white\/60,
+.theme-dark .bg-forest-50,
+.theme-dark .bg-forest-50\/40 {
+  background-color: var(--panel) !important;
+}
+
+.theme-dark .text-ink,
+.theme-dark .text-forest-900,
+.theme-dark .text-forest-700,
+.theme-dark .text-ink {
+  color: var(--text) !important;
+}
+
+.theme-dark .text-muted,
+.theme-dark .text-muted\/80 {
+  color: var(--muted) !important;
+}
+
+.theme-dark .border-line,
+.theme-dark .border-forest-100,
+.theme-dark .border-forest-200,
+.theme-dark .border-forest-300 {
+  border-color: var(--line) !important;
+}
+
+.theme-dark .shadow-card {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(117, 126, 116, 0.35);
+  border-radius: 9999px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -37,3 +129,4 @@ body {
   outline: 2px solid #2F6B3C;
   outline-offset: 2px;
 }
+

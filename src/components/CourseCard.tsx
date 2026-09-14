@@ -33,12 +33,12 @@ function CourseCardBase({ course }: CourseCardProps) {
   };
 
   return (
-    <div className="rounded-xl border border-line bg-white shadow-card">
+    <div className="overflow-hidden rounded-xl border border-line bg-white shadow-card">
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
         aria-expanded={expanded}
-        className="flex w-full items-start justify-between gap-3 px-4 py-3.5 text-left"
+        className="flex w-full items-start justify-between gap-3 border-b border-line bg-gradient-to-r from-forest-50 via-forest-50 to-white px-4 py-3.5 text-left"
       >
         <div className="min-w-0">
           <div className="flex flex-wrap items-baseline gap-x-2">
@@ -66,7 +66,7 @@ function CourseCardBase({ course }: CourseCardProps) {
       </button>
 
       {expanded && (
-        <div className="flex flex-col gap-2 border-t border-line px-4 py-3">
+        <div className="flex flex-col gap-2 bg-slate-50/60 px-4 py-3">
           {course.sections.map((section) => (
             <SectionRow
               key={section.id}

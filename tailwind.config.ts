@@ -29,7 +29,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-serif)", "Georgia", "serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       boxShadow: {

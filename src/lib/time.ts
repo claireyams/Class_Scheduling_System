@@ -23,14 +23,22 @@ export function formatDayShort(day: Day): string {
 
 // Palette rotation for per-course accents in the schedule grid.
 const COURSE_COLORS = [
-  "#2F6B3C", // forest-500
-  "#B9821A", // gold-600
-  "#C1584B", // clay-500
-  "#3E6E8E",
-  "#7A5CA8",
-  "#4B8A6F",
-  "#A65D8B",
-  "#8A7B3E",
+  "#1F7A5A",
+  "#D97706",
+  "#C2410C",
+  "#2563EB",
+  "#7C3AED",
+  "#0F766E",
+  "#DC2626",
+  "#DB2777",
+  "#0891B2",
+  "#A16207",
+  "#15803D",
+  "#7C2D12",
+  "#4338CA",
+  "#BE185D",
+  "#0369A1",
+  "#E11D48",
 ];
 
 export function colorForCourse(courseId: string): string {

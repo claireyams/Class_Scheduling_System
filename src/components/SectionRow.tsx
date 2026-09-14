@@ -53,13 +53,13 @@ function SectionRowBase({ course, section, isSelected, onToggle }: SectionRowPro
           onClick={() => onToggle(course, section)}
           className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
             isSelected
-              ? "bg-forest-600 text-white hover:bg-forest-700"
+              ? "bg-clay-500 text-white hover:bg-clay-600"
               : isFull
               ? "cursor-not-allowed bg-line text-muted"
               : "bg-forest-50 text-forest-700 hover:bg-forest-100"
           }`}
         >
-          {isSelected ? "Selected" : isFull ? "Full" : "Select"}
+          {isSelected ? "Remove" : isFull ? "Full" : "Select"}
         </button>
       </div>
     </div>
