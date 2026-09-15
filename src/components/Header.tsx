@@ -1,17 +1,15 @@
 "use client";
 
 import { useSchedule } from "@/context/ScheduleContext";
-
-type ThemeMode = "light" | "dark" | "system";
+import { useTheme } from "@/context/ThemeContext";
 
 interface HeaderProps {
   onOpenSchedule: () => void;
-  theme: ThemeMode;
-  onThemeChange: (mode: ThemeMode) => void;
 }
 
-export function Header({ onOpenSchedule, theme, onThemeChange }: HeaderProps) {
+export function Header({ onOpenSchedule }: HeaderProps) {
   const { entries, totalUnits } = useSchedule();
+  const { mode, setMode } = useTheme();
 
   return (
     <header className="border-b border-line bg-paper/95 px-5 py-4 backdrop-blur-sm sm:px-8">
@@ -25,16 +23,16 @@ export function Header({ onOpenSchedule, theme, onThemeChange }: HeaderProps) {
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
           <div className="flex overflow-hidden rounded-full border border-line bg-white p-1 shadow-sm">
-            {(["light", "dark", "system"] as ThemeMode[]).map((mode) => (
+            {(["light", "dark", "system"] as const).map((themeMode) => (
               <button
-                key={mode}
+                key={themeMode}
                 type="button"
-                onClick={() => onThemeChange(mode)}
+                onClick={() => setMode(themeMode)}
                 className={`rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] transition-colors ${
-                  theme === mode ? "bg-forest-600 text-white" : "text-muted hover:text-ink"
+                  mode === themeMode ? "bg-forest-600 text-white" : "text-muted hover:text-ink"
                 }`}
               >
-                {mode}
+                {themeMode}
               </button>
             ))}
           </div>

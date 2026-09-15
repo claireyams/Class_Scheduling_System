@@ -14,6 +14,7 @@ import { ErrorState } from "@/components/StatusStates";
 import { ScheduleGrid } from "@/components/ScheduleGrid";
 import { ScheduleSidebar } from "@/components/ScheduleSidebar";
 import { Modal } from "@/components/Modal";
+import { useTheme } from "@/context/ThemeContext";
 
 type LoadState = "loading" | "error" | "ready";
 
@@ -27,9 +28,8 @@ export default function Page() {
   );
 }
 
-type ThemeMode = "light" | "dark" | "system";
-
 function AppShell() {
+  const { effective: effectiveTheme } = useTheme();
   const [courses, setCourses] = useState<Course[]>([]);
   const [status, setStatus] = useState<LoadState>("loading");
   const [errorMessage, setErrorMessage] = useState("");
@@ -37,8 +37,6 @@ function AppShell() {
   const [scheduleView, setScheduleView] = useState<"grid" | "list">("grid");
   const [showLanding, setShowLanding] = useState(true);
   const [splitRatio, setSplitRatio] = useState(52);
-  const [theme, setTheme] = useState<ThemeMode>("system");
-  const [systemDark, setSystemDark] = useState(false);
 
   const load = useCallback((withError = false) => {
     setStatus("loading");
@@ -57,16 +55,6 @@ function AppShell() {
     load();
   }, [load]);
 
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const syncSystemTheme = () => setSystemDark(media.matches);
-    syncSystemTheme();
-    media.addEventListener("change", syncSystemTheme);
-    return () => media.removeEventListener("change", syncSystemTheme);
-  }, []);
-
-  const effectiveTheme = theme === "system" ? (systemDark ? "dark" : "light") : theme;
-
   const { query, setQuery, category, setCategory, categories, filtered } = useCourseFilter(courses);
 
   const handleDrag = (clientX: number) => {
@@ -79,14 +67,8 @@ function AppShell() {
   };
 
   return (
-    <div
-      className={`min-h-screen ${effectiveTheme === "dark" ? "theme-dark" : "theme-light"}`}
-    >
-      <Header
-        onOpenSchedule={() => setScheduleOpen(true)}
-        theme={theme}
-        onThemeChange={setTheme}
-      />
+    <div className="min-h-screen">
+      <Header onOpenSchedule={() => setScheduleOpen(true)} />
 
       <main className="mx-auto max-w-7xl px-5 py-6 sm:px-8">
         {showLanding && (

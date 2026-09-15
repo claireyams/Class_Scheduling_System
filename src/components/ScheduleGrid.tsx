@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { useSchedule } from "@/context/ScheduleContext";
+import { useTheme } from "@/context/ThemeContext";
 import { DAYS, GRID_START_MINUTES, GRID_END_MINUTES, toMinutes, formatDayShort, formatTime } from "@/lib/time";
 import { EmptyState } from "./StatusStates";
 
@@ -28,6 +29,7 @@ interface PositionedBlock extends GridBlock {
 
 export function ScheduleGrid() {
   const { entries, removeCourse } = useSchedule();
+  const { effective } = useTheme();
 
   const blocks: GridBlock[] = useMemo(() => {
     const out: GridBlock[] = [];
@@ -182,7 +184,7 @@ export function ScheduleGrid() {
                         width: `calc(${100 / b.laneCount}% - 8px)`,
                         top: `${top}%`,
                         height: `${Math.max(height, 5)}%`,
-                        backgroundColor: `${b.color}1A`,
+                        backgroundColor: effective === "dark" ? "#f7f8f5" : `${b.color}1A`,
                         borderColor: b.color,
                         color: b.color,
                       }}
@@ -194,7 +196,7 @@ export function ScheduleGrid() {
                         aria-label={`Remove ${b.label} from schedule`}
                         className="absolute right-1 top-1 rounded-full bg-white/80 p-0.5 opacity-0 shadow-sm transition-opacity hover:bg-white group-hover:opacity-100 focus-visible:opacity-100"
                       >
-                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" className="h-2.5 w-2.5">
+                        <svg viewBox="0 0 20 20" fill="none" stroke={effective === "dark" ? "white" : "currentColor"} strokeWidth="2" className="h-2.5 w-2.5">
                           <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
                         </svg>
                       </button>

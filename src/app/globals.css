@@ -38,7 +38,7 @@ html {
   --panel-alt: #233630;
   --text: #edf3ee;
   --muted: #b2bdb4;
-  --line: rgba(255, 255, 255, 0.08);
+  --line: rgba(255, 255, 255, 0.18);
   --forest: #9ad1a5;
   --forest-strong: #c8ebca;
   --shadow: rgba(0, 0, 0, 0.35);
@@ -64,11 +64,33 @@ body, input, select, button {
 
 .theme-dark .bg-white,
 .theme-dark .bg-paper,
+.theme-dark .bg-paper\/95,
 .theme-dark .bg-white\/80,
 .theme-dark .bg-white\/60,
 .theme-dark .bg-forest-50,
-.theme-dark .bg-forest-50\/40 {
+.theme-dark .bg-forest-50\/40,
+.theme-dark .bg-slate-50\/60,
+.theme-dark .bg-line {
   background-color: var(--panel) !important;
+}
+
+/* Gradient utilities aren't touched by the plain bg-* overrides above —
+   Tailwind gradient stops (from-/via-/to-) are separate classes on the
+   same element. Flatten the known gradient combos used across the app
+   to a solid panel color instead of chasing individual stop classes. */
+.theme-dark .from-forest-50.via-forest-50.to-white,
+.theme-dark .from-forest-50.via-white.to-gold-100 {
+  background-image: none !important;
+  background-color: var(--panel) !important;
+}
+
+.theme-dark .bg-gold-300\/30,
+.theme-dark .bg-forest-300\/20 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.theme-dark .border-white\/40 {
+  border-color: var(--line) !important;
 }
 
 .theme-dark .text-ink,
@@ -92,6 +114,10 @@ body, input, select, button {
 
 .theme-dark .shadow-card {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.theme-dark :focus-visible {
+  outline-color: var(--forest);
 }
 
 ::-webkit-scrollbar {
@@ -129,4 +155,3 @@ body, input, select, button {
   outline: 2px solid #2F6B3C;
   outline-offset: 2px;
 }
-

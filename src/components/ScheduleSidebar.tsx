@@ -24,7 +24,7 @@ export function ScheduleSidebar() {
           <div
             key={entry.courseId}
             className={`flex items-start justify-between gap-2 rounded-lg border bg-white px-3 py-2.5 ${
-              conflicted ? "border-clay-500/50" : "border-line"
+              conflicted ? "border-red-500/40" : "border-line"
             }`}
           >
             <div className="min-w-0">
@@ -38,7 +38,7 @@ export function ScheduleSidebar() {
                   {entry.courseCode} · {entry.section.section}
                 </span>
                 {conflicted && (
-                  <span className="rounded-full bg-clay-500/10 px-1.5 py-0.5 text-[10px] font-medium text-clay-500">
+                  <span className="rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-bold uppercase leading-tight text-white">
                     Clash
                   </span>
                 )}
