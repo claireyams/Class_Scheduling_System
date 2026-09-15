@@ -15,8 +15,8 @@
           "slotsTotal": 25,
           "slotsTaken": 21,
           "schedule": [
-            { "day": "Monday", "startTime": "9:15", "endTime": "10:45" },
-            { "day": "Thursday", "startTime": "9:15", "endTime": "10:45" }
+            { "day": "Monday", "startTime": "09:15", "endTime": "10:45" },
+            { "day": "Thursday", "startTime": "09:15", "endTime": "10:45" }
           ]
         },
         {
@@ -72,8 +72,8 @@
           "slotsTotal": 45,
           "slotsTaken": 12,
           "schedule": [
-            { "day": "Tuesday", "startTime": "12:45", "endTime": "14:15" },
-            { "day": "Friday", "startTime": "12:45", "endTime": "14:15" }
+            { "day": "Tuesday", "startTime": "09:15", "endTime": "10:45" },
+            { "day": "Friday", "startTime": "09:15", "endTime": "10:45" }
           ]
         },
         {
@@ -105,8 +105,8 @@
           "slotsTotal": 45,
           "slotsTaken": 22,
           "schedule": [
-            { "day": "Tuesday", "startTime": "07:30", "endTime": "09:15" },
-            { "day": "Thursday", "startTime": "07:30", "endTime": "09:15" }
+            { "day": "Tuesday", "startTime": "07:30", "endTime": "09:00" },
+            { "day": "Friday", "startTime": "07:30", "endTime": "09:00" }
           ]
         },
         {
@@ -117,8 +117,8 @@
           "slotsTotal": 45,
           "slotsTaken": 45,
           "schedule": [
-            { "day": "Monday", "startTime": "07:30", "endTime": "09:15" },
-            { "day": "Thursday", "startTime": "07:30", "endTime": "09:15" }
+            { "day": "Monday", "startTime": "07:30", "endTime": "09:00" },
+            { "day": "Thursday", "startTime": "07:30", "endTime": "09:00" }
           ]
         }
       ]
@@ -131,22 +131,28 @@
       "category": "Lab",
       "sections": [
         {
-          "id": "LBYARCH-EL1",
-          "section": "EL1",
+          "id": "LBYARCH-S01",
+          "section": "S01",
           "instructor": "Ryan Cruz",
           "room": "G308B",
           "slotsTotal": 25,
           "slotsTaken": 20,
-          "schedule": [{ "day": "Friday", "startTime": "13:00", "endTime": "16:00" }]
+          "schedule": [
+            { "day": "Monday", "startTime": "07:30", "endTime": "09:00" },
+            { "day": "Thursday", "startTime": "07:30", "endTime": "09:00" }
+          ]
         },
         {
-          "id": "LBYARCH-EL2",
-          "section": "EL2",
+          "id": "LBYARCH-S02",
+          "section": "S02",
           "instructor": "Carmela Uy",
           "room": "G308A",
           "slotsTotal": 25,
           "slotsTaken": 9,
-          "schedule": [{ "day": "Thursday", "startTime": "16:30", "endTime": "19:30" }]
+          "schedule": [
+            { "day": "Tuesday", "startTime": "11:00", "endTime": "12:30" },
+            { "day": "Thursday", "startTime": "11:00", "endTime": "12:30" }
+          ]
         }
       ]
     },
@@ -230,7 +236,10 @@
           "room": "G205",
           "slotsTotal": 45,
           "slotsTaken": 30,
-          "schedule": [{ "day": "Wednesday", "startTime": "07:30", "endTime": "10:45" }]
+          "schedule": [
+            { "day": "Wednesday", "startTime": "07:30", "endTime": "09:00" },
+            { "day": "Saturday", "startTime": "07:30", "endTime": "09:00" }
+          ]
         }
       ]
     },

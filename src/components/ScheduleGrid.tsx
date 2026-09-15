@@ -6,8 +6,7 @@ import { DAYS, GRID_START_MINUTES, GRID_END_MINUTES, toMinutes, formatDayShort, 
 import { EmptyState } from "./StatusStates";
 
 const SLOT_MINUTES = 30;
-const ROW_COUNT = (GRID_END_MINUTES - GRID_START_MINUTES) / SLOT_MINUTES;
-const HOUR_LABELS = Array.from({ length: ROW_COUNT / 2 + 1 }, (_, i) => GRID_START_MINUTES + i * 60);
+const BASE_DAY_WIDTH = 140;
 
 interface GridBlock {
   key: string;
@@ -17,7 +16,14 @@ interface GridBlock {
   endMinutes: number;
   label: string;
   sub: string;
+  instructor: string;
   color: string;
+}
+
+interface PositionedBlock extends GridBlock {
+  lane: number;
+  laneCount: number;
+  hasClash: boolean;
 }
 
 export function ScheduleGrid() {
@@ -35,14 +41,74 @@ export function ScheduleGrid() {
           day: meeting.day,
           startMinutes: start,
           endMinutes: end,
-          label: entry.courseCode,
+          label: `${entry.courseCode} ${entry.section.section}`,
           sub: `${formatTime(meeting.startTime)}–${formatTime(meeting.endTime)} · ${entry.section.room}`,
+          instructor: entry.section.instructor,
           color: entry.color,
         });
       }
     }
     return out;
   }, [entries]);
+
+  const gridEnd = Math.min(
+    GRID_END_MINUTES,
+    Math.max(
+      GRID_START_MINUTES + SLOT_MINUTES,
+      ...blocks.map((block) => block.endMinutes)
+    )
+  );
+  const rowCount = Math.ceil((gridEnd - GRID_START_MINUTES) / SLOT_MINUTES);
+  const hourLabels = Array.from(
+    { length: Math.floor((gridEnd - GRID_START_MINUTES) / 60) + 1 },
+    (_, i) => GRID_START_MINUTES + i * 60
+  );
+
+  const laidOutBlocks = useMemo(() => {
+    return DAYS.flatMap((day) => {
+      const dayBlocks = blocks
+        .filter((block) => block.day === day)
+        .sort((a, b) => a.startMinutes - b.startMinutes || a.endMinutes - b.endMinutes);
+      const groups: GridBlock[][] = [];
+      for (const block of dayBlocks) {
+        const group = groups[groups.length - 1];
+        if (!group || block.startMinutes >= Math.max(...group.map((item) => item.endMinutes))) {
+          groups.push([block]);
+        } else {
+          group.push(block);
+        }
+      }
+
+      return groups.flatMap((group): PositionedBlock[] => {
+        const lanes: number[] = [];
+        const positioned = group.map((block) => {
+          const lane = lanes.findIndex((end) => end <= block.startMinutes);
+          if (lane === -1) {
+            lanes.push(block.endMinutes);
+            return { block, lane: lanes.length - 1 };
+          }
+          lanes[lane] = block.endMinutes;
+          return { block, lane };
+        });
+        const laneCount = Math.max(lanes.length, 1);
+
+        return positioned.map(({ block, lane }) => ({
+          ...block,
+          lane,
+          laneCount,
+          hasClash: group.length > 1,
+        }));
+      });
+    });
+  }, [blocks]);
+
+  const dayLaneCounts = DAYS.map((day) =>
+    Math.max(1, ...laidOutBlocks.filter((block) => block.day === day).map((block) => block.laneCount))
+  );
+  const gridTemplateColumns = `56px ${dayLaneCounts
+    .map((laneCount) => `minmax(${laneCount * BASE_DAY_WIDTH}px, ${laneCount}fr)`)
+    .join(" ")}`;
+  const gridMinWidth = 56 + dayLaneCounts.reduce((total, laneCount) => total + laneCount * BASE_DAY_WIDTH, 0);
 
   if (entries.length === 0) {
     return (
@@ -55,11 +121,11 @@ export function ScheduleGrid() {
 
   return (
     <div className="overflow-x-auto rounded-xl border border-line bg-white shadow-card">
-      <div className="min-w-[640px]">
+      <div style={{ minWidth: `${gridMinWidth}px` }}>
         {/* Day header row */}
         <div
           className="grid border-b border-line"
-          style={{ gridTemplateColumns: `56px repeat(${DAYS.length}, 1fr)` }}
+          style={{ gridTemplateColumns }}
         >
           <div />
           {DAYS.map((day) => (
@@ -70,13 +136,13 @@ export function ScheduleGrid() {
         </div>
 
         {/* Grid body */}
-        <div className="relative grid" style={{ gridTemplateColumns: `56px repeat(${DAYS.length}, 1fr)` }}>
+        <div className="relative grid" style={{ gridTemplateColumns }}>
           {/* Time labels column */}
           <div
             className="grid"
-            style={{ gridTemplateRows: `repeat(${ROW_COUNT}, 28px)` }}
+            style={{ gridTemplateRows: `repeat(${rowCount}, 28px)` }}
           >
-            {HOUR_LABELS.map((minutes, i) => (
+            {hourLabels.map((minutes, i) => (
               <div
                 key={minutes}
                 style={{ gridRow: `${i * 2 + 1} / span 1` }}
@@ -94,38 +160,53 @@ export function ScheduleGrid() {
             <div
               key={day}
               className="relative border-l border-line"
-              style={{ gridTemplateRows: `repeat(${ROW_COUNT}, 28px)` }}
+              style={{ display: "grid", gridTemplateRows: `repeat(${rowCount}, 28px)` }}
             >
-              {Array.from({ length: ROW_COUNT }).map((_, i) => (
+              {Array.from({ length: rowCount }).map((_, i) => (
                 <div key={i} className={`${i % 2 === 0 ? "border-t border-line/70" : ""}`} />
               ))}
-              {blocks
+              {laidOutBlocks
                 .filter((b) => b.day === day)
                 .map((b) => {
-                  const top = ((b.startMinutes - GRID_START_MINUTES) / (GRID_END_MINUTES - GRID_START_MINUTES)) * 100;
-                  const height = ((b.endMinutes - b.startMinutes) / (GRID_END_MINUTES - GRID_START_MINUTES)) * 100;
+                  const range = gridEnd - GRID_START_MINUTES;
+                  const top = ((b.startMinutes - GRID_START_MINUTES) / range) * 100;
+                  const height = ((b.endMinutes - b.startMinutes) / range) * 100;
 
                   return (
-                    <button
+                    <div
                       key={b.key}
-                      type="button"
-                      onClick={() => removeCourse(b.courseId)}
-                      title={`${b.label} — click to remove from schedule`}
+                      title={`${b.label} — ${b.instructor}${b.hasClash ? " — schedule clash" : ""}`}
                       style={{
                         position: "absolute",
-                        left: "4px",
-                        right: "4px",
+                        left: `calc(${(b.lane * 100) / b.laneCount}% + 4px)`,
+                        width: `calc(${100 / b.laneCount}% - 8px)`,
                         top: `${top}%`,
                         height: `${Math.max(height, 5)}%`,
                         backgroundColor: `${b.color}1A`,
                         borderColor: b.color,
                         color: b.color,
                       }}
-                      className="z-10 flex flex-col justify-center overflow-hidden rounded-md border-l-[3px] px-1.5 py-1 text-left shadow-sm transition-opacity hover:opacity-80"
+                      className="group z-10 flex flex-col justify-center overflow-hidden rounded-md border-l-[3px] px-1.5 py-1 text-left shadow-sm"
                     >
-                      <span className="truncate text-[11px] font-semibold">{b.label}</span>
-                      <span className="truncate text-[10px] opacity-80">{b.sub}</span>
-                    </button>
+                      <button
+                        type="button"
+                        onClick={() => removeCourse(b.courseId)}
+                        aria-label={`Remove ${b.label} from schedule`}
+                        className="absolute right-1 top-1 rounded-full bg-white/80 p-0.5 opacity-0 shadow-sm transition-opacity hover:bg-white group-hover:opacity-100 focus-visible:opacity-100"
+                      >
+                        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" className="h-2.5 w-2.5">
+                          <path d="M5 5l10 10M15 5L5 15" strokeLinecap="round" />
+                        </svg>
+                      </button>
+                      {b.hasClash && (
+                        <span className="mb-1 self-start rounded bg-red-600 px-1.5 py-0.5 text-[8px] font-bold uppercase leading-tight text-white">
+                          Clash
+                        </span>
+                      )}
+                      <span className="truncate pr-3 text-[11px] font-semibold">{b.label}</span>
+                      <span className="truncate pr-3 text-[10px] opacity-80">{b.sub}</span>
+                      <span className="truncate pr-3 text-[10px] opacity-70">{b.instructor}</span>
+                    </div>
                   );
                 })}
             </div>
@@ -135,4 +216,3 @@ export function ScheduleGrid() {
     </div>
   );
 }
-

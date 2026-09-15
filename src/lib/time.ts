@@ -1,13 +1,25 @@
-import type { Day } from "@/types/course";
+import type { Day, Meeting } from "@/types/course";
 
 export const DAYS: Day[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export const GRID_START_MINUTES = 7 * 60; // 07:00
-export const GRID_END_MINUTES = 20 * 60; // 20:00
+export const GRID_END_MINUTES = 21 * 60 + 15; // 21:15 latest possible end
 
 export function toMinutes(time: string): number {
   const [h, m] = time.split(":").map(Number);
   return h * 60 + m;
+}
+
+// Two meetings clash if they fall on the same day and their time ranges overlap.
+// Shared by ScheduleContext (course-level conflict flags) and ScheduleGrid
+// (per-block lane layout) so both views agree on what counts as a clash.
+export function meetingsOverlap(a: Meeting, b: Meeting): boolean {
+  if (a.day !== b.day) return false;
+  const aStart = toMinutes(a.startTime);
+  const aEnd = toMinutes(a.endTime);
+  const bStart = toMinutes(b.startTime);
+  const bEnd = toMinutes(b.endTime);
+  return aStart < bEnd && bStart < aEnd;
 }
 
 export function formatTime(time: string): string {
