@@ -8,59 +8,84 @@
       "category": "Major",
       "sections": [
         {
-          "id": "CCPROG3-Y01",
-          "section": "Y01",
+          "id": "CCPROG3-S01",
+          "section": "S01",
           "instructor": "Juan Dela Cruz",
           "room": "G301",
-          "slotsTotal": 40,
-          "slotsTaken": 37,
+          "slotsTotal": 25,
+          "slotsTaken": 21,
           "schedule": [
-            { "day": "Monday", "startTime": "10:00", "endTime": "11:30" },
-            { "day": "Wednesday", "startTime": "10:00", "endTime": "11:30" }
+            { "day": "Monday", "startTime": "9:15", "endTime": "10:45" },
+            { "day": "Thursday", "startTime": "9:15", "endTime": "10:45" }
           ]
         },
         {
-          "id": "CCPROG3-Y02",
-          "section": "Y02",
+          "id": "CCPROG3-S02",
+          "section": "S02",
           "instructor": "Maria Santos",
           "room": "G305",
-          "slotsTotal": 40,
+          "slotsTotal": 25,
           "slotsTaken": 18,
           "schedule": [
-            { "day": "Tuesday", "startTime": "13:00", "endTime": "14:30" },
-            { "day": "Thursday", "startTime": "13:00", "endTime": "14:30" }
+            { "day": "Tuesday", "startTime": "12:45", "endTime": "14:15" },
+            { "day": "Friday", "startTime": "12:45", "endTime": "14:15" }
+          ]
+        },
+        {
+          "id": "CCPROG3-S03",
+          "section": "S03",
+          "instructor": "Carlos Reyes",
+          "room": "G304",
+          "slotsTotal": 25,
+          "slotsTaken": 25,
+          "schedule": [
+            { "day": "Tuesday", "startTime": "11:00", "endTime": "12:30" },
+            { "day": "Friday", "startTime": "11:00", "endTime": "12:30" }
           ]
         }
       ]
     },
     {
-      "id": "CSMODEL",
-      "code": "CSMODEL",
-      "title": "Mathematical Modeling",
+      "id": "CSMATH2",
+      "code": "CSMATH2",
+      "title": "Linear Algebra for Computer Science Students",
       "units": 3,
       "category": "Major",
       "sections": [
         {
-          "id": "CSMODEL-Y01",
-          "section": "Y01",
+          "id": "CSMATH2-S14",
+          "section": "S14",
           "instructor": "Pedro Reyes",
-          "room": "G201",
-          "slotsTotal": 35,
-          "slotsTaken": 35,
+          "room": "V202",
+          "slotsTotal": 45,
+          "slotsTaken": 45,
           "schedule": [
             { "day": "Monday", "startTime": "11:00", "endTime": "12:30" },
-            { "day": "Wednesday", "startTime": "11:00", "endTime": "12:30" }
+            { "day": "Thursday", "startTime": "11:00", "endTime": "12:30" }
           ]
         },
         {
-          "id": "CSMODEL-Y02",
-          "section": "Y02",
+          "id": "CSMATH2-S15",
+          "section": "S15",
           "instructor": "Liza Fernandez",
-          "room": "G204",
-          "slotsTotal": 35,
+          "room": "V201",
+          "slotsTotal": 45,
           "slotsTaken": 12,
           "schedule": [
-            { "day": "Friday", "startTime": "09:00", "endTime": "12:00" }
+            { "day": "Tuesday", "startTime": "12:45", "endTime": "14:15" },
+            { "day": "Friday", "startTime": "12:45", "endTime": "14:15" }
+          ]
+        },
+        {
+          "id": "CSMATH2-S16",
+          "section": "S16",
+          "instructor": "Liza Fernandez",
+          "room": "V201",
+          "slotsTotal": 45,
+          "slotsTaken": 30,
+          "schedule": [
+            { "day": "Tuesday", "startTime": "14:30", "endTime": "16:00" },
+            { "day": "Friday", "startTime": "14:30", "endTime": "16:00" }
           ]
         }
       ]
@@ -68,7 +93,7 @@
     {
       "id": "CSARCH2",
       "code": "CSARCH2",
-      "title": "Computer Organization and Architecture 2",
+      "title": "Introduction to Computer Organization and Architecture 2",
       "units": 3,
       "category": "Major",
       "sections": [
@@ -77,11 +102,11 @@
           "section": "S11",
           "instructor": "Ramon Bautista",
           "room": "Andrew 401",
-          "slotsTotal": 30,
+          "slotsTotal": 45,
           "slotsTaken": 22,
           "schedule": [
-            { "day": "Tuesday", "startTime": "08:00", "endTime": "09:30" },
-            { "day": "Thursday", "startTime": "08:00", "endTime": "09:30" }
+            { "day": "Tuesday", "startTime": "07:30", "endTime": "09:15" },
+            { "day": "Thursday", "startTime": "07:30", "endTime": "09:15" }
           ]
         },
         {
@@ -89,11 +114,11 @@
           "section": "S12",
           "instructor": "Carmela Uy",
           "room": "Andrew 402",
-          "slotsTotal": 30,
-          "slotsTaken": 30,
+          "slotsTotal": 45,
+          "slotsTaken": 45,
           "schedule": [
-            { "day": "Monday", "startTime": "14:30", "endTime": "16:00" },
-            { "day": "Wednesday", "startTime": "14:30", "endTime": "16:00" }
+            { "day": "Monday", "startTime": "07:30", "endTime": "09:15" },
+            { "day": "Thursday", "startTime": "07:30", "endTime": "09:15" }
           ]
         }
       ]
@@ -101,15 +126,15 @@
     {
       "id": "LBYARCH",
       "code": "LBYARCH",
-      "title": "Computer Organization and Architecture Laboratory",
+      "title": "Introduction to Computer Organization and Architecture Laboratory",
       "units": 1,
       "category": "Lab",
       "sections": [
         {
           "id": "LBYARCH-EL1",
           "section": "EL1",
-          "instructor": "Ramon Bautista",
-          "room": "Andrew Lab 3",
+          "instructor": "Ryan Cruz",
+          "room": "G308B",
           "slotsTotal": 25,
           "slotsTaken": 20,
           "schedule": [{ "day": "Friday", "startTime": "13:00", "endTime": "16:00" }]
@@ -118,7 +143,7 @@
           "id": "LBYARCH-EL2",
           "section": "EL2",
           "instructor": "Carmela Uy",
-          "room": "Andrew Lab 4",
+          "room": "G308A",
           "slotsTotal": 25,
           "slotsTaken": 9,
           "schedule": [{ "day": "Thursday", "startTime": "16:30", "endTime": "19:30" }]
@@ -128,139 +153,188 @@
     {
       "id": "NSSECU2",
       "code": "NSSECU2",
-      "title": "Information Assurance and Security 2",
+      "title": "Advanced and Offensive Security",
       "units": 3,
       "category": "Major",
       "sections": [
         {
-          "id": "NSSECU2-S31",
-          "section": "S31",
+          "id": "NSSECU2-S01",
+          "section": "S01",
           "instructor": "Diego Villanueva",
-          "room": "Br 302",
-          "slotsTotal": 30,
+          "room": "G205",
+          "slotsTotal": 45,
           "slotsTaken": 15,
           "schedule": [
-            { "day": "Monday", "startTime": "16:00", "endTime": "17:30" },
-            { "day": "Wednesday", "startTime": "16:00", "endTime": "17:30" }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "CSINTSY",
-      "code": "CSINTSY",
-      "title": "Intelligent Systems",
-      "units": 3,
-      "category": "Major",
-      "sections": [
-        {
-          "id": "CSINTSY-S15",
-          "section": "S15",
-          "instructor": "Anna Lim",
-          "room": "Br 210",
-          "slotsTotal": 32,
-          "slotsTaken": 28,
-          "schedule": [
-            { "day": "Tuesday", "startTime": "10:00", "endTime": "11:30" },
-            { "day": "Thursday", "startTime": "10:00", "endTime": "11:30" }
+            { "day": "Monday", "startTime": "16:15", "endTime": "17:45" },
+            { "day": "Thursday", "startTime": "16:15", "endTime": "17:45" }
           ]
         },
         {
-          "id": "CSINTSY-S16",
-          "section": "S16",
-          "instructor": "Marco Tan",
-          "room": "Br 211",
-          "slotsTotal": 32,
-          "slotsTaken": 4,
+          "id": "NSSECU2-S02",
+          "section": "S02",
+          "instructor": "Diego Villanueva",
+          "room": "G205",
+          "slotsTotal": 45,
+          "slotsTaken": 15,
           "schedule": [
-            { "day": "Friday", "startTime": "13:00", "endTime": "16:00" }
+            { "day": "Monday", "startTime": "18:00", "endTime": "19:30" },
+            { "day": "Thursday", "startTime": "18:00", "endTime": "19:30" }
           ]
         }
       ]
     },
     {
-      "id": "STINTS1",
-      "code": "STINTS1",
-      "title": "Special Topics: Data Structures for Machine Learning",
+      "id": "CCDSALG",
+      "code": "CCDSALG",
+      "title": "Data Structures and Algorithms",
+      "units": 3,
+      "category": "Major",
+      "sections": [
+        {
+          "id": "CCDSALG-S15",
+          "section": "S15",
+          "instructor": "Anna Lim",
+          "room": "G201",
+          "slotsTotal": 45,
+          "slotsTaken": 28,
+          "schedule": [
+            { "day": "Tuesday", "startTime": "12:45", "endTime": "14:15" },
+            { "day": "Friday", "startTime": "12:45", "endTime": "14:15" }
+          ]
+        },
+        {
+          "id": "CCDSALG-S16",
+          "section": "S16",
+          "instructor": "Marco Tan",
+          "room": "G202",
+          "slotsTotal": 45,
+          "slotsTaken": 4,
+          "schedule": [
+            { "day": "Tuesday", "startTime": "07:30", "endTime": "09:00" },
+            { "day": "Friday", "startTime": "07:30", "endTime": "09:00" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CSECINT",
+      "code": "CSECINT",
+      "title": "Cybersecurity and International Relations",
       "units": 3,
       "category": "Elective",
       "sections": [
         {
-          "id": "STINTS1-A21",
-          "section": "A21",
+          "id": "CSECINT-S11",
+          "section": "S11",
           "instructor": "Rico Manalo",
-          "room": "Yuchengco 505",
-          "slotsTotal": 20,
-          "slotsTaken": 20,
+          "room": "G205",
+          "slotsTotal": 45,
+          "slotsTaken": 30,
+          "schedule": [{ "day": "Wednesday", "startTime": "07:30", "endTime": "10:45" }]
+        }
+      ]
+    },
+    {
+      "id": "GEARTAP",
+      "code": "GEARTAP",
+      "title": "Art Appreciation",
+      "units": 3,
+      "category": "GE",
+      "sections": [
+        {
+          "id": "GEARTAP-Y05",
+          "section": "Y05",
+          "instructor": "Grace Ocampo",
+          "room": "FOL",
+          "slotsTotal": 45,
+          "slotsTaken": 30,
           "schedule": [
-            { "day": "Monday", "startTime": "08:00", "endTime": "09:30" },
-            { "day": "Wednesday", "startTime": "08:00", "endTime": "09:30" }
+            { "day": "Tuesday", "startTime": "18:00", "endTime": "19:30" },
+            { "day": "Friday", "startTime": "18:00", "endTime": "19:30" }
+          ]
+        },
+        {
+          "id": "GEARTAP-Y08",
+          "section": "Y-08",
+          "instructor": "Cris Cu",
+          "room": "J113",
+          "slotsTotal": 45,
+          "slotsTaken": 44,
+          "schedule": [
+            { "day": "Monday", "startTime": "16:15", "endTime": "17:45" },
+            { "day": "Thursday", "startTime": "16:15", "endTime": "17:45" }
           ]
         }
       ]
     },
     {
-      "id": "ETHICOM",
-      "code": "ETHICOM",
-      "title": "Professional Ethics for Computing Professionals",
-      "units": 3,
-      "category": "GE",
-      "sections": [
-        {
-          "id": "ETHICOM-B41",
-          "section": "B41",
-          "instructor": "Grace Ocampo",
-          "room": "Velasco 210",
-          "slotsTotal": 45,
-          "slotsTaken": 30,
-          "schedule": [{ "day": "Tuesday", "startTime": "15:00", "endTime": "18:00" }]
-        },
-        {
-          "id": "ETHICOM-B42",
-          "section": "B42",
-          "instructor": "Grace Ocampo",
-          "room": "Velasco 211",
-          "slotsTotal": 45,
-          "slotsTaken": 44,
-          "schedule": [{ "day": "Thursday", "startTime": "15:00", "endTime": "18:00" }]
-        }
-      ]
-    },
-    {
-      "id": "PHYSIFR",
-      "code": "PHYSIFR",
-      "title": "Physical Education: Frisbee",
+      "id": "PEDFOUR",
+      "code": "PEDFOUR",
+      "title": "Team Games or Dance",
       "units": 2,
       "category": "PE",
       "sections": [
         {
-          "id": "PHYSIFR-PE01",
-          "section": "PE01",
-          "instructor": "Coach Ben Aquino",
-          "room": "Yuchengco Field",
-          "slotsTotal": 30,
-          "slotsTaken": 11,
-          "schedule": [{ "day": "Saturday", "startTime": "07:00", "endTime": "09:00" }]
+          "id": "PEDFOUR-Z15",
+          "section": "Z15",
+          "instructor": "Corazon Almadilla",
+          "room": "E607",
+          "slotsTotal": 45,
+          "slotsTaken": 15,
+          "schedule": [{ "day": "Wednesday", "startTime": "15:00", "endTime": "17:00" }]
+        },
+        {
+          "id": "PEDFOUR-Z18",
+          "section": "Z18",
+          "instructor": "Balagtas Ramos",
+          "room": "E805",
+          "slotsTotal": 45,
+          "slotsTaken": 45,
+          "schedule": [{ "day": "Friday", "startTime": "15:00", "endTime": "17:00" }]
         }
       ]
     },
     {
-      "id": "FILICOM",
-      "code": "FILICOM",
-      "title": "Filipino sa Iba't Ibang Disiplina",
+      "id": "LCFAITH",
+      "code": "LCFAITH",
+      "title": "Faith Worth Living",
       "units": 3,
       "category": "GE",
       "sections": [
         {
-          "id": "FILICOM-C11",
-          "section": "C11",
+          "id": "LCFAITH-Z11",
+          "section": "Z11",
           "instructor": "Josefina Cruz",
-          "room": "Velasco 305",
-          "slotsTotal": 40,
+          "room": "FOL",
+          "slotsTotal": 45,
           "slotsTaken": 25,
           "schedule": [
-            { "day": "Monday", "startTime": "13:00", "endTime": "14:30" },
-            { "day": "Wednesday", "startTime": "13:00", "endTime": "14:30" }
+            { "day": "Monday", "startTime": "16:15", "endTime": "17:45" },
+            { "day": "Thursday", "startTime": "16:15", "endTime": "17:45" }
+          ]
+        },
+        {
+          "id": "LCFAITH-Z14",
+          "section": "Z14",
+          "instructor": "Francis Salcedo",
+          "room": "FOL",
+          "slotsTotal": 45,
+          "slotsTaken": 45,
+          "schedule": [
+            { "day": "Monday", "startTime": "14:30", "endTime": "16:00" },
+            { "day": "Thursday", "startTime": "14:30", "endTime": "16:00" }
+          ]
+        },
+        {
+          "id": "LCFAITH-Z22",
+          "section": "Z22",
+          "instructor": "Neil Adriano",
+          "room": "LS311",
+          "slotsTotal": 45,
+          "slotsTaken": 30,
+          "schedule": [
+            { "day": "Tuesday", "startTime": "16:15", "endTime": "17:45" },
+            { "day": "Friday", "startTime": "16:15", "endTime": "17:45" }
           ]
         }
       ]
